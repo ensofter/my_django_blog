@@ -1,0 +1,78 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}Обратная связь{% endblock %}
+
+{% block header %}
+    {% include './block/header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <nav aria-label="breadcrumb" class="mt-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Контакты</li>
+                </ol>
+            </nav>
+            <p class="lead">Чтобы связаться со мной заполните форму обратной связи</p>
+            {{ hello.q }}
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form name="contact-form" method="post" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <label for="name" class="sr-only">Ваше имя</label>
+                            {{ form.name }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <label for="email" class="sr-only">Ваша почта</label>
+                            {{ form.email }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label for="subject" class="sr-only">Тема</label>
+                            {{ form.subject }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <div class="md-form">
+                            <label for="message" class="sr-only">Ваше сообщение</label>
+                            {{ form.message }}
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center text-md-left mt-3">
+                    <button class="btn btn-primary" type="submit">Отправить</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

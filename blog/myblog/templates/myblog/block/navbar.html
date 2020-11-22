@@ -16,15 +16,19 @@
         <a href="{% url 'index' %}" class="nav-link">Главная</a>
       </li>
       <li class="nav-item ">
-        <a href="#" class="nav-link">Контакты</a>
+        <a href="{% url 'contact' %}" class="nav-link">Контакты</a>
       </li>
     </ul>
     <form action="" class="form-inline my-2 my-lg-0">
       <input type="text" class="form-control mr-sm-2" placeholder="Поиск" aria-label="Поиск">
       <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Поиск</button>
     </form>
+    {% if user.is_authenticated %}
+    <span class="navbar-text mr-2">{{ user }}</span>
+    <a href="{% url 'signout' %}" class="btn btn-outline-light">Выход</a>
+    {% else %}
     <a href="{% url 'signin' %}" class="btn btn-outline-light mr-2">Вход</a>
     <a href="{% url 'signup' %}" class="btn btn-outline-light mr-2">Регистрация</a>
-    <a href="#" class="btn btn-outline-light">Выход</a>
+    {% endif %}
   </div>
 </nav>
