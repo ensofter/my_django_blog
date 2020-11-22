@@ -1,0 +1,35 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}Поиск{% endblock %}
+
+{% block header %}
+    {% include './block/search_form.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <nav aria-label="breadcrumb" class="mt-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Поиск</li>
+                </ol>
+            </nav>
+            <p class="lead">Найдено записей: 3</p>
+            {{ results }}<br>
+            {{ count }}
+            <a href=""><h2>Заголовок поста 1</h2></a>
+            <p>Это красткое описание поста. Это красткое описание поста. Это красткое описание поста.</p>
+            <hr>
+            <a href=""><h2>Заголовок поста 2</h2></a>
+            <p>Это красткое описание поста. Это красткое описание поста. Это красткое описание поста.</p>
+            <hr>
+            <a href=""><h2>Заголовок поста 3</h2></a>
+            <p>Это красткое описание поста. Это красткое описание поста. Это красткое описание поста.</p>
+            <hr>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

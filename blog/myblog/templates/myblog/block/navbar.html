@@ -19,8 +19,8 @@
         <a href="{% url 'contact' %}" class="nav-link">Контакты</a>
       </li>
     </ul>
-    <form action="" class="form-inline my-2 my-lg-0">
-      <input type="text" class="form-control mr-sm-2" placeholder="Поиск" aria-label="Поиск">
+    <form action="{% url 'search_results' %}" method="get" class="form-inline my-2 my-lg-0">
+      <input name="q" type="text" class="form-control mr-sm-2" placeholder="Поиск" aria-label="Поиск">
       <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Поиск</button>
     </form>
     {% if user.is_authenticated %}
