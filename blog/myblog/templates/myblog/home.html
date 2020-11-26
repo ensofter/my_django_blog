@@ -13,13 +13,16 @@
         {% for post in page_obj %}
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="media/{{ post.image }}" alt="" class="card-img-top">
+            <img src="{{ post.image.url }}" alt="" class="card-img-top">
             <div class="card-body">
               <h4 class="card-title">{{ post.h1 }}</h4>
-              {{ post.description|safe|truncatechars:100 }}
+              {{ post.description|safe|truncatechars:100 }}<br>
+              {% for tag in post.tag.all %}
+                  <a href="{% url 'tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+              {% endfor %}
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="{% url 'post_detail' slug=post.url %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                  <a href="{% url 'post_detail' post.url %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
                 </div>
                 <small class="text-muted">{{ post.created_at }}</small>
               </div>

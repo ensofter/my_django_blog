@@ -21,10 +21,16 @@
             <p class="lead">
             {{ post.content|safe }}
             </p>
+            <div class="d-flex justify-content-end">
+                {% for tag in post.tag.all %}
+                    <a href="{% url 'tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                {% endfor %}
+            </div>
             <hr>
-            <p class="lead text-right">Автор: {{ post.author }}</p>
-            <hr>
-            <p class="text-right">Опубликовано {{ post.created_at }}</p>
+            <div class="d-flex">
+                <div class="mr-auto p-2 lead">Автор: {{ post.author }}</div>
+                <div class="p-2">Опубликовано: {{ post.created_at }}</div>
+            </div>
             <hr>
             {% include './block/comments.html' %}
         </div>

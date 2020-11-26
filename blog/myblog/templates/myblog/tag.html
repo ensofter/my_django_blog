@@ -1,0 +1,41 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}Поиск{% endblock %}
+
+{% block header %}
+    {% include './block/header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <p class="my-3">Другие теги:
+        {% for mt in common_tags %}
+            <a href="{% url 'tag' mt.slug %}" class="badge badge-success">#{{mt}}</a>
+        {% endfor %}
+    </p>
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{ post.image.url }}" alt="" class="card-img-top">
+            <div class="card-body">
+              <h4 class="card-title">{{ post.h1 }}</h4>
+              {{ post.description|safe|truncatechars:100 }}<br>
+                {% for tag in post.tag.all %}
+                  <a href="{% url 'tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                {% endfor %}
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'post_detail' slug=post.url %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                </div>
+                <small class="text-muted">{{ post.created_at }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+</div>
+{% endblock %}
