@@ -11,10 +11,9 @@
         </form>
     </div>
     {% else %}
-    <h6 class="card-header"><a href="{% url 'signin' %}">Авторизуйтесь</a> или <a href="{% url 'signup' %}">зарегистрируйтесь</a></h6>
+    <h6 class="card-header"><a href="{% url 'signin' %}">Авторизуйтесь</a> или <a href="{% url 'signup' %}">зарегистрируйтесь</a> чтобы оставить комментарий</h6>
     {% endif %}
 </div>
-{% if user.is_authenticated %}
 {% for comment in post.comments.all %}
 <div class="media mb-4">
     <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
@@ -24,4 +23,3 @@
     </div>
 </div>
 {% endfor %}
-{% endif %}

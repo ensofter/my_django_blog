@@ -32,7 +32,7 @@ class PostDetailView(View):
             'common_tags': common_tags,
             'last_posts': last_posts,
             'comment_form': comment_form
-    })
+        })
 
     def post(self, request, slug, *args, **kwargs):
         comment_form = CommentForm(request.POST)
