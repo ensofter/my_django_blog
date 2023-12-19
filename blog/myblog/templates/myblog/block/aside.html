@@ -1,0 +1,25 @@
+{% load static %}
+<div class="col-md-4">
+    <div class="card my-4">
+        <h5 class="card-header">Теги</h5>
+        <div class="card-body">
+            <div class="d-flex flex-wrap">
+                {% for mt in common_tags %}
+                    <a href="{% url 'tag' mt.slug %}" class="m-3 h5 text-primary">#{{mt}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="card my-4">
+        <h5 class="card-header">Последние статьи</h5>
+            {% for lp in last_posts %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ lp.h1 }}</h5>
+                    <img src="{{ lp.image.url }}" alt="" class="card-img-top">
+                    {{ lp.description|safe|truncatechars:100 }}
+                    <a href="{% url 'post_detail' lp.url%}" class="card-link">Подробнее</a>
+                    <hr>
+                </div>
+            {% endfor %}
+    </div>
+</div>

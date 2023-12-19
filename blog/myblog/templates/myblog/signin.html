@@ -1,0 +1,53 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+    <section class="my-registration-form">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <!--    ЭТО ХЛЕБНЫЕ КРОШКИ -->
+                    <nav aria-label="breadcrumb" class="my-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Форма авторизации</li>
+                        </ol>
+                    </nav>
+
+                    <div class="row justify-content-center">
+                        <div class="col-6">
+                            <p class="lead">Для входа укажите логин и пароль</p>
+                            {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <form method="post" action="{% url 'signin' %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="inputUsername" class="form-label visually-hidden">Имя пользователя</label>
+                                    {{ form.username }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputPassword" class="form-label visually-hidden">Пароль</label>
+                                    {{ form.password }}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Войти</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,48 @@
+<section class="my-navigation">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
+          <div class="container-fluid">
+              <a href="{% url 'index' %}" class="navbar-brand">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="30" height="30" alt="Python">
+              </a>
+              <a href="{% url 'index' %}" class="navbar-brand">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Nuxt_logo.svg" width="30" height="30" alt="NuxtJS">
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                      {% if request.get_full_path == '/' %}
+                        <a class="nav-link active" href="{% url 'index' %}">Главная</a>
+                      {% else %}
+                        <a class="nav-link" href="{% url 'index' %}">Главная</a>
+                      {% endif %}
+                      {% if request.get_full_path == '/contact/' %}
+                        <a class="nav-link active" href="{% url 'contact' %}">Контакты</a>
+                      {% else %}
+                        <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
+                      {% endif %}
+                  </div>
+                  <form action="{% url 'search_results' %}" method="get" class="d-flex" role="search">
+                    <input name="q" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                    <button class="btn btn-outline-success me-2" type="submit">Найти</button>
+                  </form>
+                    {% if user.is_authenticated %}
+                        <span class="navbar-text me-2">{{ user }}</span>
+                        <a href="{% url 'signout' %}" class="btn btn-outline-light">Выход</a>
+                    {% else %}
+                        {% if request.get_full_path == '/signin/' %}
+                            <a href="{% url 'signin' %}" class="btn btn-outline-light me-2 active">Войти</a>
+                        {% else %}
+                            <a href="{% url 'signin' %}" class="btn btn-outline-light me-2">Войти</a>
+                        {% endif %}
+                        {% if request.get_full_path == '/signup/' %}
+                            <a href="{% url 'signup' %}" class="btn btn-outline-light me-2 active">Регистрация</a>
+                        {% else %}
+                            <a href="{% url 'signup' %}" class="btn btn-outline-light me-2">Регистрация</a>
+                        {% endif %}
+                    {% endif %}
+            </div>
+          </div>
+      </nav>
+</section>

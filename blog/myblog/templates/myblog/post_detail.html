@@ -1,0 +1,48 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block title %}Главная страница моего блога{% endblock %}
+
+{% block header %}
+    {% include './block/header.html' %}
+{% endblock %}
+
+{% block content %}
+    <section class="my-post-detail">
+        <div class="container">
+            <div class="row">
+                <!--    ЭТО ЛЕВАЯ КОЛОНКА КОНТЕНТА ПОСТА -->
+                <div class="col-lg-8">
+                    <!--    ЭТО ХЛЕБНЫЕ КРОШКИ -->
+                    <nav aria-label="breadcrumb" class="my-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ post.h1 }}</li>
+                        </ol>
+                    </nav>
+                    <!--    ЭТО ТЕЛО ПОСТА -->
+                    <img class="img-fluid rounded " src="{{ post.image.url }}" alt="">
+                    <hr>
+                    <p class="lead">
+                        {{ post.content|safe }}
+                    </p>
+                    <div class="d-flex justify-content-end">
+                        {% for tag in post.tag.all %}
+                            <a href="{% url 'tag' tag.slug %}" class="badge bg-info text-dark me-2">#{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <div class="lead">Автор: {{ post.author }}</div>
+                        <div>Опубликовано: {{ post.created_at }}</div>
+                    </div>
+                    <hr>
+                    <!--    ЭТО КОМПОНЕНТ С КОММЕНТАРИЯМИ -->
+                    {% include './block/comments.html' %}
+                </div>
+                <!--    ЭТО ПРАВАЯ КОЛОНКА -->
+                {% include './block/aside.html' %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

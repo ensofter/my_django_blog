@@ -1,0 +1,22 @@
+.my-carousel {
+    padding: 0;
+}
+
+.my-carousel h5{
+    font-size: 60px;
+}
+
+.my-carousel p{
+    font-size: 30px;
+}
+.carousel-caption {
+    bottom: 100px;
+}
+
+.carousel-item {
+    height: 20rem;
+}
+
+.my-footer {
+    background-color: #f5f5f5;
+}

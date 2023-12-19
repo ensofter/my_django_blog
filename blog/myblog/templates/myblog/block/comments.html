@@ -1,0 +1,28 @@
+{% load static %}
+<div class="card my-4">
+    <h5 class="card-header">Прокомментируй:</h5>
+    <div class="card-body">
+        {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ comment_form.text }}
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+        {% else %}
+            <h6 class="card-body"><a href="{% url 'signin' %}">Авторизуйтесь</a> или <a href="{% url 'signup' %}">зарегистрируйтесь</a> чтобы оставить комментарий</h6>
+        {% endif %}
+    </div>
+</div>
+{% for comment in post.comments.all %}
+<div class="d-flex">
+    <div class="flex-shrink-0">
+        <img class="rounded-circle" src="http://placehold.it/50x50" alt="">
+    </div>
+    <div class="flex-grow-1 ms-3">
+        <h5 class="mt-0">{{comment.username}}</h5>
+        {{comment.text}}
+    </div>
+</div>
+{% endfor %}
